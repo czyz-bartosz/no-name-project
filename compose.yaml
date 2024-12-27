@@ -1,0 +1,61 @@
+services:
+  auth-backend:
+    build:
+      context: ./auth-backend
+    ports:
+      - '4000:4000'
+    volumes:
+      - /app/node_modules
+    command: npm run watch
+    develop:
+      watch:
+        - action: sync
+          path: ./auth-backend/src
+          target: /app/src
+          ignore:
+            - ./auth-backend/node_modules/
+        - action: rebuild
+          path: ./auth-backend/package.json
+    environment:
+      NODE_ENV: development
+
+  main-backend:
+    build:
+      context: ./main-backend
+    ports:
+      - '5000:5000'
+    volumes:
+      - /app/node_modules
+    command: npm run watch
+    develop:
+      watch:
+        - action: sync
+          path: ./main-backend/src
+          target: /app/src
+          ignore:
+            - ./main-backend/node_modules/
+        - action: rebuild
+          path: ./main-backend/package.json
+    environment:
+      NODE_ENV: development
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+        - action: sync
+          path: ./frontend/public
+          target: /app/public
+        - action: rebuild
+          path: ./frontend/package.json
+    environment:
+      NODE_ENV: development
