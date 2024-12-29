@@ -10,6 +10,7 @@
     "watch": "npx concurrently \"npm run build:watch\" \"npm run dev:run\"",
     "dev:run": "npx nodemon dist/index.js"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "description": "",
@@ -17,6 +18,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"

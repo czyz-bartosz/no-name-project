@@ -1,12 +1,16 @@
 import express, { Express, Request, Response } from "express";
-import config from "./config";
+import config from "./config.js";
+import sequelize from './db.js';
+import './models/User.js';
+import router from "./routes/auth.js";
+
+await sequelize.sync();
 
 const app: Express = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("auth-backend!");
-});
+app.use(express.json());
+app.use(router);
 
-app.listen(config.port, () => {
-  console.log(`[server]: Server is running at http://localhost:${config.port}`);
+app.listen(config.PORT, () => {
+  console.log(`[server]: Server is running at http://localhost:${config.PORT}`);
 });
