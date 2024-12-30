@@ -2,11 +2,7 @@ import { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import User from '../../models/User.js';
 
-interface UserRegistrationBody {
-    email: string;
-    password: string;
-}
-
+type UserRegistrationBody = Pick<User, 'email' | 'password'>;
 type UserRegistrationRequest = Request<{}, {}, UserRegistrationBody>;
 
 const userRegistrationValidator = [

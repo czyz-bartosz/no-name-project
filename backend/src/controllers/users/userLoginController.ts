@@ -5,10 +5,8 @@ import User from '../../models/User.js';
 import config from '../../config.js';
 import AuthJwtPayload from '../../interfaces/AuthJwtPayload.js';
 
-interface UserLoginBody {
-    email: string;
-    password: string;
-}
+
+type UserLoginBody = Pick<User, 'email' | 'password'>;
 
 type UserLoginRequest = Request<{}, {}, UserLoginBody>;
 

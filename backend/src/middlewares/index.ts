@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 import config from '../config.js';
 import AuthJwtPayload from '../interfaces/AuthJwtPayload.js';
 
-interface CustomRequest extends Request {
-    authPayload: AuthJwtPayload;
+interface RequestWithJwtPayload extends Request {
+    authPayload?: AuthJwtPayload;
 }
   
-const verifyToken = (req: CustomRequest, res: Response, next: NextFunction) => {
+const verifyTokenMiddleware = (req: RequestWithJwtPayload, res: Response, next: NextFunction) : void => {
     try {
         const token = req.header('Authorization')?.replace('Bearer ', '');
 
@@ -26,7 +26,6 @@ const verifyToken = (req: CustomRequest, res: Response, next: NextFunction) => {
         }
 
         req.authPayload = decoded as AuthJwtPayload;
-
         next();
     } catch (err) {
         const error = err as Error;
@@ -34,4 +33,4 @@ const verifyToken = (req: CustomRequest, res: Response, next: NextFunction) => {
     }
 };
 
-export { verifyToken };
+export { RequestWithJwtPayload, verifyTokenMiddleware };
