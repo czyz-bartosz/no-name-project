@@ -1,7 +1,7 @@
 services:
-  auth-backend:
+  backend:
     build:
-      context: ./auth-backend
+      context: ./backend
     ports:
       - '4000:4000'
     volumes:
@@ -10,35 +10,15 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./auth-backend/src
+          path: ./backend/src
           target: /app/src
           ignore:
-            - ./auth-backend/node_modules/
+            - ./backend/node_modules/
         - action: rebuild
-          path: ./auth-backend/package.json
+          path: ./backend/package.json
     environment:
       NODE_ENV: development
       JWT_SECRET: # write JWT secret key
-
-  main-backend:
-    build:
-      context: ./main-backend
-    ports:
-      - '5000:5000'
-    volumes:
-      - /app/node_modules
-    command: npm run watch
-    develop:
-      watch:
-        - action: sync
-          path: ./main-backend/src
-          target: /app/src
-          ignore:
-            - ./main-backend/node_modules/
-        - action: rebuild
-          path: ./main-backend/package.json
-    environment:
-      NODE_ENV: development
 
   frontend:
     build:
