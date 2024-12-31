@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from "express";
-import config from "./config.js";
-import sequelize from './db.js';
-import './models/User.js';
+import config from "./config/index.js";
+import sequelize from './config/db.js';
+import './config/models.js';
 import publicRouter from "./routes/public/index.js";
 import router from "./routes/index.js";
 
-await sequelize.sync();
+await sequelize.sync({alter: true});
 
 const app: Express = express();
 

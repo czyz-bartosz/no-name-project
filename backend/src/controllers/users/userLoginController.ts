@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
-import config from '../../config.js';
+import config from '../../config/index.js';
 import AuthJwtPayload from '../../interfaces/AuthJwtPayload.js';
 
 
@@ -17,13 +17,6 @@ const userLoginValidator = [
 
 const userLogin = async (req: UserLoginRequest, res: Response) => {
     try {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty()) {
-            res.status(400).json({ errors: errors.array() });
-            return;
-        }
-
         const { email, password } = req.body;
 
         let user = await User.findOne({ 
@@ -46,8 +39,8 @@ const userLogin = async (req: UserLoginRequest, res: Response) => {
         
         res.status(200).json({ token });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An unexpected error occurred. Please try again.' });
+        const err = error as Error;
+        res.status(500).json({ message: err.message });
     }
 };
 
