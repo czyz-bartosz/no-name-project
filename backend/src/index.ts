@@ -5,7 +5,7 @@ import './config/models.js';
 import publicRouter from "./routes/public/index.js";
 import router from "./routes/index.js";
 
-await sequelize.sync({alter: true});
+await sequelize.sync();
 
 const app: Express = express();
 

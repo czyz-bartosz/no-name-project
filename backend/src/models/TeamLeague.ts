@@ -38,6 +38,12 @@ TeamLeague.init(
   {
     sequelize,
     tableName: 'teams_leagues',
+    indexes: [
+      {
+        unique: true,
+        fields: ['teamsId', 'leaguesId'], // Composite unique key
+      },
+    ],
   }
 );
 
