@@ -17,6 +17,10 @@ TeamLeague.init(
         model: 'teams',
         key: 'id',
       },
+      validate: {
+        notNull: { msg: 'Team ID is required' },
+        isInt: { msg: 'Team ID must be an integer' },
+      },
     },
     leaguesId: {
       type: DataTypes.INTEGER,
@@ -24,6 +28,10 @@ TeamLeague.init(
       references: {
         model: 'leagues',
         key: 'id',
+      },
+      validate: {
+        notNull: { msg: 'League ID is required' },
+        isInt: { msg: 'League ID must be an integer' },
       },
     },
   },

@@ -21,6 +21,15 @@ League.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [1, 255],
+          msg: "Name must be up to 255 characters long"
+        },
+        notNull: {
+          msg: "Name is required"
+        }
+      }
     },
     creatorUserId: {
       type: DataTypes.INTEGER,

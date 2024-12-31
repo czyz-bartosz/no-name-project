@@ -30,9 +30,13 @@ User.init(
         msg: "Email is already in use"
       },
       validate: {
-        isEmail: true,
+        isEmail: { msg: "Must be a valid email address" },
         notNull: {
           msg: "Email is required"
+        },
+        len: {
+          args: [1, 255],
+          msg: "Email must be between 1 and 255 characters long"
         },
         isUnique: async (value: string, next: Function) => {
           const user = await User.findOne({ where: { email: value } });
@@ -48,8 +52,8 @@ User.init(
       allowNull: false,
       validate: {
         len: {
-          args: [1, 100],
-          msg: "Password must be between 1 and 100 characters long"
+          args: [1, 255],
+          msg: "Password must be between 1 and 255 characters long"
         },
         notNull: {
           msg: "Password is required"
@@ -65,6 +69,10 @@ User.init(
         },
         notNull: {
           msg: "Name is required"
+        },
+        len: {
+          args: [1, 255],
+          msg: "Name must be between 1 and 255 characters long"
         }
       }
     },
@@ -77,6 +85,10 @@ User.init(
         },
         notNull: {
           msg: "Surname is required"
+        },
+        len: {
+          args: [1, 255],
+          msg: "Surname must be between 1 and 255 characters long"
         }
       }
     },
