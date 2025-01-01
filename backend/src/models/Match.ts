@@ -80,7 +80,6 @@ Match.init(
         key: 'id',
       },
       validate: {
-        notNull: { msg: 'Referee user ID is required' },
         isInt: { msg: 'Referee user ID must be an integer' },
       },
     },
