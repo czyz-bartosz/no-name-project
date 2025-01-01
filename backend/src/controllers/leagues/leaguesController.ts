@@ -4,7 +4,6 @@ import { RequestWithJwtPayload } from "../../middlewares/index.js";
 import Team from "../../models/Team.js";
 import TeamLeague from "../../models/TeamLeague.js";
 import Match from "../../models/Match.js";
-
 type CreateLeagueRequest = RequestWithJwtPayload & Request<{}, {}, League>;
 
 // Create a new league
@@ -28,6 +27,19 @@ export const createLeagueController = async (req: CreateLeagueRequest, res: Resp
 export const getLeaguesController = async (req: Request, res: Response) => {
     try {
         const leagues = await League.findAll();
+        res.status(200).json(leagues);
+    } catch (error) {
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const getMyLeaguesController = async (req: RequestWithJwtPayload, res: Response) => {
+    if(req.authPayload === undefined) {
+        throw new Error('Use verifyTokenMiddleware');
+    }
+    try {
+        const leagues = await League.findAll({where: { creatorUserId: req.authPayload.id }});
         res.status(200).json(leagues);
     } catch (error) {
         const err = error as Error;
