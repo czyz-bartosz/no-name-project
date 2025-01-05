@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavbarMainPage from "./components/NavbarMainPage";
 import BodyMainPage from "./components/BodyMainPage";
@@ -11,7 +12,15 @@ import Register from "./components/Register";
 function App() {
   return (
     <>
-      <Register></Register>
+      <Router>
+        <NavbarMainPage />
+        <Routes>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
+        </Routes>
+        <Footer></Footer>
+      </Router>
     </>
   );
 }

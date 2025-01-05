@@ -4,7 +4,6 @@ import NavbarMainPage from "./NavbarMainPage";
 function Register() {
   return (
     <>
-      <NavbarMainPage></NavbarMainPage>
       <div className="bgGray mt-4 heigthLogin ">
         <div className="container   bg-danger p-5 containerMaxWidth rounded-4">
           <div className="d-flex text-align-center justify-content-center">
@@ -57,7 +56,6 @@ function Register() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }

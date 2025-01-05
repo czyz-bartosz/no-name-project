@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 function NavbarMainPage() {
   return (
     <>
       <nav className="navbar navbar-expand bg-dark p-3 navbar-dark">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to={"/"}>
             <img src="/src/assets/Logo.png" alt="logo" width={100} />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -20,13 +21,13 @@ function NavbarMainPage() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link active bg-danger rounded-2"
                   aria-current="page"
-                  href="#"
+                  to="/login"
                 >
                   Zaloguj się
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
