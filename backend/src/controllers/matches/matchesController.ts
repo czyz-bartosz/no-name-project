@@ -5,6 +5,16 @@ import { Request, Response } from "express";
 
 type editMatchControllerRequest = RequestWithJwtPayload & Request<{ id: number }, {}, Match>;
 
+const showMatchesController = async (req: Request, res: Response) => {
+    try {
+        const matches = await Match.findAll();
+        res.status(200).json(matches);
+    } catch (error) {
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
+    }
+};
+
 const editMatchController = async (req: editMatchControllerRequest, res: Response) => {
     if (!req.authPayload) {
         throw new Error('Use verifyTokenMiddleware');
@@ -89,4 +99,4 @@ const getMatchesForReferreController = async (req: RequestWithJwtPayload, res: R
     }
 };
 
-export {editMatchController, getMatchByIdController, getMatchesForReferreController};
+export {editMatchController, getMatchByIdController, getMatchesForReferreController, showMatchesController};
