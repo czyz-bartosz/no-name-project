@@ -5,8 +5,10 @@ import showTeamsController from "../../controllers/teams/showTeamController.js";
 import showUsersController from "../../controllers/users/showUsersController.js";
 import { getLeagueMatchesById, getLeaguesController, getLeagueTeamsById } from "../../controllers/leagues/leaguesController.js";
 import { getMatchByIdController, showMatchesController } from "../../controllers/matches/matchesController.js";
+import express from 'express';
 const router = Router();
 
+router.use(express.static('public'));
 router.post("/login", userLogin);
 router.post("/register", userRegistrationController);
 router.get("/teams", showTeamsController);
