@@ -8,6 +8,7 @@ import BodyMainPage from "./components/BodyMainPage";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import TeamDisplay from "./components/TeamDisplay";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
         </Routes>
         <Footer></Footer>
+
+        <TeamDisplay></TeamDisplay>
       </Router>
     </>
   );
