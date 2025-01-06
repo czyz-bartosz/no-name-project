@@ -1,14 +1,12 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/db.js';
 import User from './User.js';  // Import User model
-import Player from './Player.js';
-import TeamsLeagues from './TeamLeague.js';
-import Match from './Match.js';
 
 class Team extends Model {
   declare id: number;
   declare name: string;
   declare creatorUserId: number;
+  declare logoUrl: string;
 }
 
 Team.init(
@@ -41,6 +39,10 @@ Team.init(
         notNull: { msg: 'Creator user ID is required' },
         isInt: { msg: 'Creator user ID must be an integer' },
       },
+    },
+    logoUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

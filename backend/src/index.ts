@@ -11,7 +11,7 @@ await sequelize.sync();
 const app: Express = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '4mb' }));
 app.use('/public', publicRouter);
 app.use('/', router);
 
