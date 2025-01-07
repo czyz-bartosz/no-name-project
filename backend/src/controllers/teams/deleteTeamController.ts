@@ -1,8 +1,9 @@
 import { RequestWithJwtPayload } from "../../middlewares";
-import { Response, Request } from "express";
+import { Response } from "express";
 import Team from "../../models/Team.js";
 
-type DeleteTeamRequest = RequestWithJwtPayload & Request<Pick<Team, 'id'>, {}, {}>;
+type DeleteTeamRequestParams = {id: string};
+type DeleteTeamRequest = RequestWithJwtPayload<DeleteTeamRequestParams, {}, {}>;
 
 const deleteTeamController = async (req: DeleteTeamRequest, res: Response) => {
     if(req.authPayload === undefined) {
@@ -10,15 +11,7 @@ const deleteTeamController = async (req: DeleteTeamRequest, res: Response) => {
     }
      
     try {
-        if(req.params.id === undefined) {
-            throw new Error('Team id is required');
-        }
-
-        if(isNaN(Number(req.params.id))) {
-            throw new Error('Team id must be a number');
-        }
-
-        const teamId = Number(req.params.id);
+        const teamId = req.params.id;
         const team = await Team.findByPk(teamId);
         if(team === null) {
             throw new Error('Team not found');

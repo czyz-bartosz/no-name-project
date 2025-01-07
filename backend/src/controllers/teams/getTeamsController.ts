@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import Team from "../../models/Team.js";
 
-const showTeamsController = async (req: Request, res: Response) => {     
+const getTeamsController = async (req: Request, res: Response) => {     
     try {
         const teams = await Team.findAll();
         res.status(200).json(teams);
@@ -11,4 +11,4 @@ const showTeamsController = async (req: Request, res: Response) => {
     }
 };
 
-export default showTeamsController;
+export default getTeamsController;
