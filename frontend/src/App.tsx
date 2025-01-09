@@ -9,19 +9,21 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import TeamDisplay from "./components/TeamDisplay";
+import { AuthProvider } from "./components/AuthContext";
 
 function App() {
   return (
     <>
       <Router>
-        <NavbarMainPage />
-        <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
-        </Routes>
-        <Footer></Footer>
-
+        <AuthProvider>
+          <NavbarMainPage />
+          <Routes>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
+          </Routes>
+          <Footer></Footer>
+        </AuthProvider>
         <TeamDisplay></TeamDisplay>
       </Router>
     </>

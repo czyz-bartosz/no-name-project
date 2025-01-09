@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 function NavbarMainPage() {
+  const { isLoggedIn, logout } = useAuth();
   return (
     <>
       <nav className="navbar navbar-expand bg-dark p-3 navbar-dark">
@@ -20,15 +22,23 @@ function NavbarMainPage() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link
-                  className="nav-link active bg-danger rounded-2"
-                  aria-current="page"
-                  to="/login"
-                >
-                  Zaloguj się
-                </Link>
-              </li>
+              {isLoggedIn ? (
+                <li className="nav-item">
+                  <button className="btn nav-link" onClick={logout}>
+                    Wyloguj
+                  </button>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active bg-danger rounded-2"
+                    aria-current="page"
+                    to="/login"
+                  >
+                    Zaloguj się
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
