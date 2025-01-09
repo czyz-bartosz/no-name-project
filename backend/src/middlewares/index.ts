@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from '../config/index.js';
 import AuthJwtPayload from '../interfaces/AuthJwtPayload.js';
 
-interface RequestWithJwtPayload extends Request {
+interface RequestWithJwtPayload<T={}, P={}, Q={}, K={}> extends Request<T, P, Q, K> {
     authPayload?: AuthJwtPayload;
 }
   

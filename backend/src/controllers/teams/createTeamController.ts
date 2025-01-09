@@ -1,10 +1,11 @@
 import { RequestWithJwtPayload } from "../../middlewares";
-import { Response, Request } from "express";
+import { Response } from "express";
 import Team from "../../models/Team.js";
 import fs from 'fs/promises';
 import path from 'path';
 
-type CreateTeamRequest = RequestWithJwtPayload & Request<{}, {}, Team>;
+type CreateTeamRequestBody = Partial<Team> & { base64Logo?: string };
+type CreateTeamRequest = RequestWithJwtPayload<{}, {}, CreateTeamRequestBody>;
 
 const createTeamController = async (req: CreateTeamRequest, res: Response) => {
     if(req.authPayload === undefined) {
@@ -15,7 +16,7 @@ const createTeamController = async (req: CreateTeamRequest, res: Response) => {
         const team = Team.build(req.body);
         team.creatorUserId = req.authPayload.id;
 
-        const base64Image = req.body.base64Logo as string | undefined;
+        const base64Image = req.body.base64Logo;
         let extension: string | undefined;
         let buffer: Buffer | undefined;
         if (base64Image) {
