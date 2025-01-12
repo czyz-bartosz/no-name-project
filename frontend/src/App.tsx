@@ -1,6 +1,9 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+import "./custom.scss";
+import "bootstrap/dist/css/bootstrap.min.css"; // Stylowanie
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavbarMainPage from "./components/NavbarMainPage";
@@ -23,8 +26,8 @@ function App() {
             <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
           </Routes>
           <Footer></Footer>
+          <TeamDisplay></TeamDisplay>
         </AuthProvider>
-        <TeamDisplay></TeamDisplay>
       </Router>
     </>
   );

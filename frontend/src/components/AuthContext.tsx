@@ -10,11 +10,13 @@ export const AuthProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = (token: string) => {
+    console.log("Zapisuję token:", token);
     localStorage.setItem("token", token);
     setIsLoggedIn(true);
   };
 
   const logout = () => {
+    console.log("Usuwam token");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };

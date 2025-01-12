@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TeamDisplayCard from "./TeamDisplayCard";
+import { useAuth } from "./AuthContext";
 
 interface clubCard {
   name: string;
@@ -8,9 +9,17 @@ interface clubCard {
 
 function TeamDisplay() {
   const [teamCard, setTeamCard] = useState<clubCard[]>([]);
-
+  const { isLoggedIn } = useAuth();
   useEffect(() => {
-    fetch("http://localhost:4000/public/teams")
+    const token = localStorage.getItem("token");
+    console.log("isLoggedIn zmienił się na:", isLoggedIn);
+    fetch("http://localhost:4000/teams/mine", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         // Przekształć dane z API, aby pasowały do interfejsu
@@ -23,7 +32,7 @@ function TeamDisplay() {
       .catch((error) =>
         console.error("Błąd podczas pobierania danych:", error)
       );
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>

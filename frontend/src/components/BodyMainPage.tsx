@@ -1,7 +1,9 @@
 import React from "react";
 import murawa from "../assets/murawa.jpg"; // Import tła
-
+import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 function BodyMainPage() {
+  const { isLoggedIn } = useAuth();
   return (
     <body className="d-flex flex-column min-vh-100">
       <div
@@ -28,9 +30,12 @@ function BodyMainPage() {
                   <p className="card-text">
                     Zobacz wszystkie nadchodzące i zakończone mecze.
                   </p>
-                  <a href="#" className="btn btn-primary">
+                  <Link
+                    to={isLoggedIn ? "/Matches" : "/login"}
+                    className="btn btn-danger"
+                  >
                     Przeglądaj
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -43,9 +48,12 @@ function BodyMainPage() {
                   <p className="card-text">
                     Stwórz nową ligę i zarządzaj rozgrywkami.
                   </p>
-                  <a href="#" className="btn btn-success">
+                  <Link
+                    to={isLoggedIn ? "/Leagues" : "/login"}
+                    className="btn btn-success"
+                  >
                     Utwórz
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -58,9 +66,12 @@ function BodyMainPage() {
                   <p className="card-text">
                     Dodaj nowe zespoły do swojej ligi.
                   </p>
-                  <a href="#" className="btn btn-warning">
+                  <Link
+                    to={isLoggedIn ? "/Teams" : "/login"}
+                    className="btn btn-warning"
+                  >
                     Dodaj
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
