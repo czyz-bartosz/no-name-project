@@ -11,6 +11,7 @@ function TeamDisplay() {
   const [teamCard, setTeamCard] = useState<clubCard[]>([]);
   const { isLoggedIn } = useAuth();
   useEffect(() => {
+    if (!isLoggedIn) setTeamCard([]);
     const token = localStorage.getItem("token");
     console.log("isLoggedIn zmienił się na:", isLoggedIn);
     fetch("http://localhost:4000/teams/mine", {

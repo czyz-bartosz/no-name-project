@@ -1,4 +1,10 @@
-import { Children, createContext, useContext, useState } from "react";
+import {
+  Children,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -8,6 +14,11 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) setIsLoggedIn(true);
+  });
 
   const login = (token: string) => {
     console.log("Zapisuję token:", token);
