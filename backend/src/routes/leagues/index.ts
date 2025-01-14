@@ -1,5 +1,9 @@
-import { Router, Request, Response } from "express";
-import { addTeamToLeague, createLeagueController, generateLeagueSchedule, getMyLeaguesController } from "../../controllers/leagues/leaguesController.js";
+import { Router } from "express";
+import generateLeagueSchedule from "../../controllers/leagues/generateLeagueSchedule.js";
+import createLeagueController from "../../controllers/leagues/createLeagueController.js";
+import getMyLeaguesController from "../../controllers/leagues/getMyLeaguesController.js";
+import addTeamToLeague from "../../controllers/leagues/addTeamToLeague.js";
+
 const router = Router();
 
 router
