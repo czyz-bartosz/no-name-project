@@ -4,6 +4,8 @@ import { RequestWithJwtPayload } from "../../middlewares/index.js";
 import TeamLeague from "../../models/TeamLeague.js";
 import Match from "../../models/Match.js";
 
+
+
 // // Update a league
 // export const updateLeague = async (req: Request, res: Response) => {
 //     try {

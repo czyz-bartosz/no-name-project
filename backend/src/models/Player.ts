@@ -1,7 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/db.js';  // Adjust this import based on your project structure
-import User from './User.js';  // Import User model
-import Team from './Team.js';  // Import Team model
 
 class Player extends Model {
   declare usersId: number;
@@ -56,7 +54,5 @@ Player.init(
   }
 );
 
-Player.belongsTo(User, { foreignKey: 'usersId' });
-Player.belongsTo(Team, { foreignKey: 'teamsId' });
 
 export default Player;

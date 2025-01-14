@@ -109,9 +109,4 @@ User.init(
   }
 );
 
-// User.hasMany(League, {foreignKey: 'creatorUserId'});
-// User.hasMany(Match, { foreignKey: 'refereeUserId' });
-// User.hasMany(Player, { foreignKey: 'usersId' });
-// User.hasMany(Team, { foreignKey: 'creatorUserId' });
-
 export default User;
