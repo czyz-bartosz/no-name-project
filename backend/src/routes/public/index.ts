@@ -6,6 +6,7 @@ import showUsersController from "../../controllers/users/showUsersController.js"
 import { getLeagueMatchesById, getLeaguesController, getLeagueTeamsById } from "../../controllers/leagues/leaguesController.js";
 import { getMatchByIdController, showMatchesController } from "../../controllers/matches/matchesController.js";
 import express from 'express';
+import getLeagueTableController from "../../controllers/leagues/getLeagueTableController.js";
 const router = Router();
 
 router.use(express.static('public'));
@@ -18,5 +19,6 @@ router.get("/leagues/:id/matches", getLeagueMatchesById);
 router.get("/leagues/:id/teams", getLeagueTeamsById);
 router.get("/matches/:id", getMatchByIdController);
 router.get("/matches", showMatchesController);
+router.get("/leagues/:id/table", getLeagueTableController);
 
 export default router;

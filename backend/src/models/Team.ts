@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/db.js';
-import User from './User.js';  // Import User model
 
 class Team extends Model {
   declare id: number;
@@ -50,11 +49,5 @@ Team.init(
     tableName: 'teams',
   }
 );
-
-Team.belongsTo(User, { foreignKey: 'creatorUserId' });
-// Team.hasMany(Player, { foreignKey: 'teamsId' });
-// Team.hasMany(TeamsLeagues, { foreignKey: 'teamsId' });
-// Team.hasMany(Match, { foreignKey: 'homeTeamId' });
-// Team.hasMany(Match, { foreignKey: 'awayTeamId' });
 
 export default Team;

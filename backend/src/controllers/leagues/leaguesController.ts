@@ -192,6 +192,8 @@ export const generateLeagueSchedule = async (req: RequestWithJwtPayload, res: Re
     }
 };
 
+
+
 // // Update a league
 // export const updateLeague = async (req: Request, res: Response) => {
 //     try {

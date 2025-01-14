@@ -1,8 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/db.js';
-import Team from './Team.js';  // Import Team model
-import League from './League.js';  // Import League model
-import User from './User.js';  // Import User model
 
 class Match extends Model {
   declare id: number;
@@ -15,6 +12,20 @@ class Match extends Model {
   declare awayTeamGoals: number;
   declare isLive: boolean;
   declare isOver: boolean;
+
+  getWinnerTeamId(): number | null {
+    if (!this.isOver) {
+      return null;
+    }
+    
+    if (this.homeTeamGoals > this.awayTeamGoals) {
+      return this.homeTeamId;
+    } else if (this.homeTeamGoals < this.awayTeamGoals) {
+      return this.awayTeamId;
+    } else {
+      return null;
+    }
+  };
 }
 
 Match.init(
@@ -132,10 +143,5 @@ Match.init(
     timestamps: false,
   }
 );
-
-Match.belongsTo(League, { foreignKey: 'leagueId' });
-Match.belongsTo(Team, { foreignKey: 'homeTeamId' });
-Match.belongsTo(Team, { foreignKey: 'awayTeamId' });
-Match.belongsTo(User, { foreignKey: 'refereeUserId' });
 
 export default Match;
