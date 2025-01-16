@@ -15,6 +15,11 @@ import TeamDisplay from "./components/TeamDisplay";
 import { AuthProvider } from "./components/AuthContext";
 import Example from "./components/Example";
 import Teams from "./components/Teams";
+import LeaguesDiplay from "./components/LeaguesDisplay";
+import LeaguesDisplayCard from "./components/LeaguesDisplayCard";
+import Leagues from "./components/Leagues";
+import LeagueDetails from "./components/LeagueDetails";
+import LeagueDetailsSummary from "./components/LeagueDetailsSummary";
 
 function App() {
   return (
@@ -27,6 +32,15 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
             <Route path="/Teams" element={<Teams></Teams>}></Route>
+            <Route path="/Leagues" element={<Leagues></Leagues>}></Route>
+            <Route
+              path="/LeagueDetails/:id"
+              element={<LeagueDetails></LeagueDetails>}
+            ></Route>
+            <Route
+              path="/LeagueDetailsSummary/:id/table"
+              element={<LeagueDetailsSummary></LeagueDetailsSummary>}
+            ></Route>
           </Routes>
           <Footer></Footer>
         </AuthProvider>

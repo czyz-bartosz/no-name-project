@@ -29,13 +29,12 @@ function TeamDisplay({ refreshTrigger }: TeamDisplayProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Przekształć dane z API, aby pasowały do interfejsu
         const mappedData: clubCard[] = data.map((item: any) => ({
           id: item.id,
-          name: item.name, // Pobierz właściwość "name"
-          jpgSrc: item.logoUrl, // Zamień "logoUrl" na "jpgSrc"
+          name: item.name,
+          jpgSrc: item.logoUrl,
         }));
-        setTeamCard(mappedData); // Ustaw stan z przekształconymi danymi
+        setTeamCard(mappedData);
       })
       .catch((error) =>
         console.error("Błąd podczas pobierania danych:", error)
