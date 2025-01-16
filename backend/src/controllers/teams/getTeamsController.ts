@@ -3,7 +3,7 @@ import Team from "../../models/Team.js";
 
 const getTeamsController = async (req: Request, res: Response) => {     
     try {
-        const teams = await Team.findAll();
+        const teams = await Team.findAll({where: {isDeleted: false}});
         res.status(200).json(teams);
     } catch (error) {
         const err = error as Error;

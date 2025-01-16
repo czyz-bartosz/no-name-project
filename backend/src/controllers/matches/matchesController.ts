@@ -3,7 +3,7 @@ import League from "../../models/League.js";
 import Match from "../../models/Match.js";
 import { Request, Response } from "express";
 
-type editMatchControllerRequest = RequestWithJwtPayload & Request<{ id: number }, {}, Match>;
+type editMatchControllerRequest = RequestWithJwtPayload<{ id: number }, {}, Match>;
 
 const showMatchesController = async (req: Request, res: Response) => {
     try {
@@ -54,7 +54,7 @@ const editMatchController = async (req: editMatchControllerRequest, res: Respons
 
         for (const key of Object.keys(req.body)) {
             if (allowedAttributes.includes(key as keyof Match)) {
-                updates[key as keyof Match] = req.body[key];
+                updates[key as keyof Match] = req.body[key as keyof Match];
             }
         }
 

@@ -3,7 +3,7 @@ import League from "../../models/League.js";
 
 const getLeaguesController = async (req: Request, res: Response) => {
     try {
-        const leagues = await League.findAll();
+        const leagues = await League.findAll({where: {isDeleted: false}});
         res.status(200).json(leagues);
     } catch (error) {
         const err = error as Error;

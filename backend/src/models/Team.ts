@@ -6,6 +6,7 @@ class Team extends Model {
   declare name: string;
   declare creatorUserId: number;
   declare logoUrl: string;
+  declare isDeleted: boolean;
 }
 
 Team.init(
@@ -42,6 +43,11 @@ Team.init(
     logoUrl: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

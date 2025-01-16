@@ -9,6 +9,7 @@ import getLeagueTeamsById from "../../controllers/leagues/getLeagueTeamsById.js"
 import getLeagueMatchesById from "../../controllers/leagues/getLeagueMatchesById.js";
 import express from 'express';
 import getLeagueTableController from "../../controllers/leagues/getLeagueTableController.js";
+import getLeagueById from "../../controllers/leagues/getLeagueById.js";
 const router = Router();
 
 router.use(express.static('public'));
@@ -22,5 +23,6 @@ router.get("/leagues/:id/teams", getLeagueTeamsById);
 router.get("/matches/:id", getMatchByIdController);
 router.get("/matches", showMatchesController);
 router.get("/leagues/:id/table", getLeagueTableController);
+router.get("/leagues/:id", getLeagueById);
 
 export default router;

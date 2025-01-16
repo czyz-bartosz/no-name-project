@@ -17,6 +17,7 @@ class League extends Model {
   declare id: number;
   declare name: string;
   declare creatorUserId: number;
+  declare isDeleted: boolean;
 
   async getTable() {
     const matches = await Match.findAll({
@@ -110,6 +111,11 @@ League.init(
         model: 'users',
         key: 'id',
       },
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

@@ -19,7 +19,7 @@ const deleteTeamController = async (req: DeleteTeamRequest, res: Response) => {
         if(team.creatorUserId !== req.authPayload.id) {
             throw new Error('You can only delete teams that you created');
         }
-        await team.destroy();
+        await team.update({isDeleted: true});
         res.status(204).send();
     } catch (error) {
         const err = error as Error;
