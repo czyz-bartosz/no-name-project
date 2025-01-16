@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -14,6 +15,7 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }: any) => {
     console.log("Usuwam token");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (

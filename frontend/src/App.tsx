@@ -13,6 +13,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import TeamDisplay from "./components/TeamDisplay";
 import { AuthProvider } from "./components/AuthContext";
+import Example from "./components/Example";
+import Teams from "./components/Teams";
 
 function App() {
   return (
@@ -24,9 +26,9 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
+            <Route path="/Teams" element={<Teams></Teams>}></Route>
           </Routes>
           <Footer></Footer>
-          <TeamDisplay></TeamDisplay>
         </AuthProvider>
       </Router>
     </>
