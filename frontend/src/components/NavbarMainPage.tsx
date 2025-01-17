@@ -4,7 +4,7 @@ function NavbarMainPage() {
   const { isLoggedIn, logout } = useAuth();
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-dark p-3 navbar-dark">
+      <nav className="navbar navbar-expand-lg bg-dark p-3 navbar-dark sticky-top">
         <div className="container">
           <Link className="navbar-brand" to={"/"}>
             <img src="/src/assets/Logo.png" alt="logo" width={100} />
