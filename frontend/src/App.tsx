@@ -20,29 +20,30 @@ import LeaguesDisplayCard from "./components/LeaguesDisplayCard";
 import Leagues from "./components/Leagues";
 import LeagueDetails from "./components/LeagueDetails";
 import LeagueDetailsSummary from "./components/LeagueDetailsSummary";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          <NavbarMainPage />
           <Routes>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/" element={<BodyMainPage></BodyMainPage>}></Route>
-            <Route path="/Teams" element={<Teams></Teams>}></Route>
-            <Route path="/Leagues" element={<Leagues></Leagues>}></Route>
-            <Route
-              path="/LeagueDetails/:id"
-              element={<LeagueDetails></LeagueDetails>}
-            ></Route>
-            <Route
-              path="/LeagueDetailsSummary/:id/table"
-              element={<LeagueDetailsSummary></LeagueDetailsSummary>}
-            ></Route>
+            <Route path="/" element={<Layout />}>  
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route index element={<BodyMainPage></BodyMainPage>}></Route>
+              <Route path="/Teams" element={<Teams></Teams>}></Route>
+              <Route path="/Leagues" element={<Leagues></Leagues>}></Route>
+              <Route
+                path="/LeagueDetails/:id"
+                element={<LeagueDetails></LeagueDetails>}
+              ></Route>
+              <Route
+                path="/LeagueDetailsSummary/:id/table"
+                element={<LeagueDetailsSummary></LeagueDetailsSummary>}
+              ></Route>
+            </Route>
           </Routes>
-          <Footer></Footer>
         </AuthProvider>
       </Router>
     </>

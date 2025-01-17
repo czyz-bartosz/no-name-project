@@ -5,13 +5,11 @@ import { useAuth } from "./AuthContext";
 function BodyMainPage() {
   const { isLoggedIn } = useAuth();
   return (
-    <body className="d-flex flex-column min-vh-100">
       <div
-        className="background-image d-flex align-items-center justify-content-center text-white"
+        className="d-flex align-items-center justify-content-center text-white flex-grow-1 p-5"
         style={{
           background: `url(${murawa}) no-repeat center center/cover`,
-          height: "100vh",
-          width: "100%",
+          height: "100%"
         }}
       >
         <div className="container text-center">
@@ -78,7 +76,6 @@ function BodyMainPage() {
           </div>
         </div>
       </div>
-    </body>
   );
 }
 
