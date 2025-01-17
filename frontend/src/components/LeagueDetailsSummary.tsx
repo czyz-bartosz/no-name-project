@@ -16,10 +16,15 @@ interface team {
   logoUrl: string;
 }
 
+interface leagueName {
+  name: string;
+}
+
 function LeagueDetailsSummary() {
   const { id: leagueId } = useParams();
   const [leagueTable, setLeagueTable] = useState<leagueTable[]>([]);
   const [teams, setTeams] = useState<team[]>([]);
+  const [leagueName, setLeagueName] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:4000/public/leagues/${leagueId}/table`, {
@@ -56,12 +61,45 @@ function LeagueDetailsSummary() {
         }));
         setTeams(mappedData2);
       });
-  }, []);
+
+    fetch(`http://localhost:4000/public/leagues/${leagueId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLeagueName(data.name);
+      });
+  }, [leagueId]);
+
+  const generate = () => {
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:4000/leagues/${leagueId}/matches/generate`, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("generowanie pomyślnie");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   return (
     <>
       <div className="text-dark bg-light p-3 mb-2">
-        <h1>Tabela</h1>
+        <h1>Liga {leagueName} </h1>
+        <h3>Tabela</h3>
       </div>
       <table className="table">
         <thead>
@@ -100,6 +138,9 @@ function LeagueDetailsSummary() {
           />
         </div>
       ))}
+      <div>
+        <button onClick={generate}>awd awd</button>
+      </div>
     </>
   );
 }

@@ -3,6 +3,7 @@ interface props {
   leagueName: string;
   onButtonClick: () => void;
   onDivClick: () => void;
+  onRemove: () => void;
 }
 
 function LeaguesDisplayCard(props: props) {
@@ -28,6 +29,10 @@ function LeaguesDisplayCard(props: props) {
           type="button"
           className="btn-close position-absolute top-0 end-0 m-2"
           aria-label="Close"
+          onClick={(event1) => {
+            event1.stopPropagation();
+            props.onRemove();
+          }}
         ></button>
       </div>
     </>

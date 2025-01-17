@@ -47,6 +47,26 @@ function LeaguesDiplay(props: refreshAPIleagues) {
     navigate(`/LeagueDetailsSummary/${leagueId}/table`);
   };
 
+  const handleRemoveLeague = (leagueId: string) => {
+    const token = localStorage.getItem("token");
+    fetch(`http://localhost:4000/leagues/${leagueId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          setLeaguesNames((prev) =>
+            prev.filter((league) => league.id !== leagueId)
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Błąd podczas usuwania zespołu", error);
+      });
+  };
+
   return (
     <>
       {" "}
@@ -59,6 +79,9 @@ function LeaguesDiplay(props: refreshAPIleagues) {
           }}
           onDivClick={() => {
             handleLeagueClick(league.id);
+          }}
+          onRemove={() => {
+            handleRemoveLeague(league.id);
           }}
         />
       ))}

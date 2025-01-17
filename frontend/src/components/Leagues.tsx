@@ -7,6 +7,7 @@ function Leagues() {
 
   const handleRefreshApiLeagues = () => {
     setRefreshLeagues((prev) => !prev);
+    setAddButton((prev) => !prev);
   };
   const [addButton, setAddButton] = useState(false);
 
