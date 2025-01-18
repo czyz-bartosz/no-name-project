@@ -215,6 +215,53 @@
 			"response": []
 		},
 		{
+			"name": "/public/teams/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/public/teams/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"public",
+						"teams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
 			"name": "/public/leagues/:id/teams",
 			"event": [
 				{
@@ -496,7 +543,7 @@
 			"response": []
 		},
 		{
-			"name": "/verify",
+			"name": "/public/refreshToken",
 			"event": [
 				{
 					"listen": "test",
@@ -511,24 +558,18 @@
 			],
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/verify",
+					"raw": "{{base_url}}/public/refreshToken",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"verify"
+						"public",
+						"refreshToken"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -1147,7 +1188,7 @@
 			"response": []
 		},
 		{
-			"name": "/public/teams/:id",
+			"name": "/verify",
 			"event": [
 				{
 					"listen": "test",
@@ -1161,32 +1202,25 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{base_url}}/public/teams/:id",
+					"raw": "{{base_url}}/verify",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"public",
-						"teams",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"verify"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."

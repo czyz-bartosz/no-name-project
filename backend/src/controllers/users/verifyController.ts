@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { RequestWithJwtPayload } from '../middlewares';
+import { RequestWithJwtPayload } from '../../middlewares';
 
 const verifyController = async (req: RequestWithJwtPayload, res: Response) => {
     if(req.authPayload === undefined) {

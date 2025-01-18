@@ -11,6 +11,7 @@ import express from 'express';
 import getLeagueTableController from "../../controllers/leagues/getLeagueTableController.js";
 import getLeagueById from "../../controllers/leagues/getLeagueById.js";
 import getTeamByIdController from "../../controllers/teams/getTeamByIdController.js";
+import refreshTokenController from "../../controllers/users/refreshTokenController.js";
 const router = Router();
 
 router.use(express.static('public'));
@@ -26,5 +27,6 @@ router.get("/matches", showMatchesController);
 router.get("/leagues/:id/table", getLeagueTableController);
 router.get("/leagues/:id", getLeagueById);
 router.get("/teams/:id", getTeamByIdController);
+router.get("/refreshToken", refreshTokenController);
 
 export default router;

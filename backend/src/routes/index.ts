@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { verifyTokenMiddleware } from "../middlewares/index.js";
-import verifyController from "../controllers/verifyController.js";
+import verifyController from "../controllers/users/verifyController.js";
 import showProfileController from "../controllers/users/showProfileController.js";
 import editProfileController from "../controllers/users/editProfileController.js";
 import teamRouter from "./teams/index.js";
 import leagueRouter from "./leagues/index.js";
 import matchRouter from "./matches/index.js";
 import refereeRouter from "./referee/index.js";
+import refreshTokenController from "../controllers/users/refreshTokenController.js";
 
 const router = Router();
 
