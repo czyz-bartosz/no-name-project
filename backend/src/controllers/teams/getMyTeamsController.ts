@@ -9,7 +9,7 @@ const getMyTeamsController = async (req: RequestWithJwtPayload, res: Response) =
     }
 
     try {
-        const teams = await Team.findAll({where: {creatorUserId: req.authPayload.id}});
+        const teams = await Team.findAll({where: {creatorUserId: req.authPayload.id, isDeleted: false}});
         res.status(200).json(teams);
     } catch (error) {
         const err = error as Error;

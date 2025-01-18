@@ -877,6 +877,62 @@
 			"response": []
 		},
 		{
+			"name": "/leagues/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/leagues/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"leagues",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
 			"name": "/leagues",
 			"event": [
 				{
@@ -1091,7 +1147,7 @@
 			"response": []
 		},
 		{
-			"name": "/leagues/:id",
+			"name": "/public/teams/:id",
 			"event": [
 				{
 					"listen": "test",
@@ -1105,17 +1161,7 @@
 				}
 			],
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -1127,12 +1173,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/leagues/:id",
+					"raw": "{{base_url}}/public/teams/:id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"leagues",
+						"public",
+						"teams",
 						":id"
 					],
 					"variable": [

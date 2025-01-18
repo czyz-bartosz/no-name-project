@@ -7,7 +7,7 @@ const getMyLeaguesController = async (req: RequestWithJwtPayload, res: Response)
         throw new Error('Use verifyTokenMiddleware');
     }
     try {
-        const leagues = await League.findAll({where: { creatorUserId: req.authPayload.id }});
+        const leagues = await League.findAll({where: { creatorUserId: req.authPayload.id, isDeleted: false }});
         res.status(200).json(leagues);
     } catch (error) {
         const err = error as Error;

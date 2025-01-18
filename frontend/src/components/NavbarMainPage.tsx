@@ -27,14 +27,6 @@ function NavbarMainPage() {
                   <li className="nav-item">
                     <Link
                       className="nav-link active bg-danger rounded-2 me-3"
-                      to="/Matches"
-                    >
-                      Twoje Mecze
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active bg-danger rounded-2 me-3"
                       to="/Teams"
                     >
                       Twoje Zespoły
@@ -48,7 +40,14 @@ function NavbarMainPage() {
                       Twoje Ligi
                     </Link>
                   </li>
-
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active bg-danger rounded-2 me-3"
+                      to="/RefereePanel"
+                    >
+                      Panel sędziego
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <button className="btn nav-link" onClick={logout}>
                       Wyloguj

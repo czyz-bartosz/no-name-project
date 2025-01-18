@@ -1,26 +1,20 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./custom.scss";
 import "bootstrap/dist/css/bootstrap.min.css"; // Stylowanie
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import NavbarMainPage from "./components/NavbarMainPage";
 import BodyMainPage from "./components/BodyMainPage";
-import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import TeamDisplay from "./components/TeamDisplay";
 import { AuthProvider } from "./components/AuthContext";
-import Example from "./components/Example";
 import Teams from "./components/Teams";
-import LeaguesDiplay from "./components/LeaguesDisplay";
-import LeaguesDisplayCard from "./components/LeaguesDisplayCard";
 import Leagues from "./components/Leagues";
 import LeagueDetails from "./components/LeagueDetails";
 import LeagueDetailsSummary from "./components/LeagueDetailsSummary";
 import Layout from "./components/Layout";
+import RefereePage from "./components/referee/RefereePage";
+import UpdateMatchPage from "./components/referee/UpdateMatchPage";
+import Matches from "./components/Matches";
 
 function App() {
   return (
@@ -42,6 +36,9 @@ function App() {
                 path="/LeagueDetailsSummary/:id/table"
                 element={<LeagueDetailsSummary></LeagueDetailsSummary>}
               ></Route>
+              <Route path="/RefereePanel" element={<RefereePage />}></Route>
+              <Route path="/RefereePanel/UpdateMatch/:id" element={<UpdateMatchPage />}></Route>
+              <Route path="/Matches" element={<Matches />}></Route>
             </Route>
           </Routes>
         </AuthProvider>

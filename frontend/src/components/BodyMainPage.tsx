@@ -29,7 +29,7 @@ function BodyMainPage() {
                     Zobacz wszystkie nadchodzące i zakończone mecze.
                   </p>
                   <Link
-                    to={isLoggedIn ? "/Matches" : "/login"}
+                    to={"/Matches"}
                     className="btn btn-danger"
                   >
                     Przeglądaj
