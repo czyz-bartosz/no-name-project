@@ -1,9 +1,10 @@
 import { FC, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Match from "../../interfaces/Match";
 import { Form, Button, Alert } from "react-bootstrap";
 
 const UpdateMatchPage: FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { match, setMatch, isLoading, error } = useGetMatchQuery(id);
 
@@ -12,24 +13,29 @@ const UpdateMatchPage: FC = () => {
   }
 
   if (error) {
-    return <Alert variant="danger">Error fetching match data. Please try again later.</Alert>;
+    return (
+      <Alert variant="danger">
+        Error fetching match data. Please try again later.
+      </Alert>
+    );
   }
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (!match) return;
     fetch(`http://localhost:4000/matches/${id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(match)
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(match),
     }).then((response) => {
       if (!response.ok) {
         console.error("Failed to update match");
       } else {
         console.log("Match updated successfully");
+        navigate("/RefereePanel");
       }
     });
   };
@@ -43,10 +49,17 @@ const UpdateMatchPage: FC = () => {
           <Form.Control
             type="datetime-local"
             placeholder="Enter start datetime"
-            value={match?.startDatetime ? new Date(match?.startDatetime).toISOString().slice(0, 16) : ''}
+            value={
+              match?.startDatetime
+                ? new Date(match?.startDatetime).toISOString().slice(0, 16)
+                : ""
+            }
             onChange={(e) => {
               if (match) {
-                setMatch({ ...match, startDatetime: new Date(e.target.value + 'Z').toISOString() });
+                setMatch({
+                  ...match,
+                  startDatetime: new Date(e.target.value + "Z").toISOString(),
+                });
               }
             }}
           />
@@ -61,7 +74,10 @@ const UpdateMatchPage: FC = () => {
             min={0}
             onChange={(e) => {
               if (match) {
-                setMatch({ ...match, homeTeamGoals: parseInt(e.target.value, 10) });
+                setMatch({
+                  ...match,
+                  homeTeamGoals: parseInt(e.target.value, 10),
+                });
               }
             }}
           />
@@ -76,7 +92,10 @@ const UpdateMatchPage: FC = () => {
             min={0}
             onChange={(e) => {
               if (match) {
-                setMatch({ ...match, awayTeamGoals: parseInt(e.target.value, 10) });
+                setMatch({
+                  ...match,
+                  awayTeamGoals: parseInt(e.target.value, 10),
+                });
               }
             }}
           />
@@ -118,7 +137,12 @@ const UpdateMatchPage: FC = () => {
 
 export default UpdateMatchPage;
 
-function useGetMatchQuery(id: string | undefined): { match: Match | null; isLoading: boolean; error: string | null; setMatch: (match: Match) => void } {
+function useGetMatchQuery(id: string | undefined): {
+  match: Match | null;
+  isLoading: boolean;
+  error: string | null;
+  setMatch: (match: Match) => void;
+} {
   const [match, setMatch] = useState<Match | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -128,12 +152,15 @@ function useGetMatchQuery(id: string | undefined): { match: Match | null; isLoad
 
     const fetchMatch = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/public/matches/${id}`, {
+        const response = await fetch(
+          `http://localhost:4000/public/matches/${id}`,
+          {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
-        });
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch match data");
         }

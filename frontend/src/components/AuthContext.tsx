@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsCookie from "js-cookie";
 
@@ -50,10 +45,13 @@ export const AuthProvider = ({ children }: any) => {
   // Funkcja odświeżająca token
   const refreshToken = async () => {
     try {
-      const response = await fetch("http://localhost:4000/refreshToken", {
-        method: "GET",
-        credentials: "include", // Umożliwia przesyłanie ciasteczek HttpOnly
-      });
+      const response = await fetch(
+        "http://localhost:4000/public/refreshToken",
+        {
+          method: "GET",
+          credentials: "include", // Umożliwia przesyłanie ciasteczek HttpOnly
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -94,7 +92,7 @@ export const AuthProvider = ({ children }: any) => {
     console.log("Usuwam token");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    jsCookie.remove('refreshToken');
+    jsCookie.remove("refreshToken");
     navigate("/"); // Przekierowanie do logowania
   };
 
