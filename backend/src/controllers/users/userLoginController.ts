@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 import config from '../../config/index.js';
 import AuthJwtPayload from '../../interfaces/AuthJwtPayload.js';
-
+import ms from 'ms';
 
 type UserLoginBody = Pick<User, 'email' | 'password'>;
 
@@ -35,6 +35,14 @@ const userLogin = async (req: UserLoginRequest, res: Response) => {
 
         const token = jwt.sign(authPayload, config.JWT_SECRET, {
             expiresIn: config.JWT_TOKEN_EXPIRATION,
+        });
+
+        const refreshToken = jwt.sign(authPayload, config.JWT_REFRESH_SECRET, {
+            expiresIn: config.JWT_REFRESH_TOKEN_EXPIRATION,
+        });
+
+        res.cookie('refreshToken', refreshToken, {
+            maxAge: ms(config.JWT_REFRESH_TOKEN_EXPIRATION),
         });
         
         res.status(200).json({ token });
