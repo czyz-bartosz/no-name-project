@@ -11,7 +11,7 @@ function LeaguesDisplayCard(props: props) {
     <>
       <div
         onClick={props.onDivClick}
-        className="col-md-11 position-relative d-flex shadow justify-content-between border border-3 align-items-center bg-light border-dark mt-5 mb-5 p-5 rounded-5 border-opacity-75 m-auto "
+        className="col-md-11 position-relative d-flex shadow justify-content-between border border-3 align-items-center bg-light border-dark mt-3 mb-2 p-5 rounded-5 border-opacity-75 m-auto "
       >
         <h1>{props.leagueName}</h1>
 

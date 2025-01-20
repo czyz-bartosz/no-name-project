@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Prev } from "react-bootstrap/esm/PageItem";
 import { useParams } from "react-router-dom";
+import TeamVsTeamCard from "./TeamVsTeamCard";
 
 interface leagueTable {
   teamId: string;
@@ -10,7 +12,7 @@ interface leagueTable {
   points: number;
 }
 
-interface team {
+export interface team {
   id: string;
   name: string;
   logoUrl: string;
@@ -20,11 +22,23 @@ interface leagueName {
   name: string;
 }
 
+interface scheduleMatch {
+  homeTeamId: string;
+  awayTeamId: string;
+  startDatetime: string;
+}
+
 function LeagueDetailsSummary() {
   const { id: leagueId } = useParams();
   const [leagueTable, setLeagueTable] = useState<leagueTable[]>([]);
   const [teams, setTeams] = useState<team[]>([]);
   const [leagueName, setLeagueName] = useState("");
+  const [scheduleMatch, setScheduleMatch] = useState<scheduleMatch[]>([]);
+  const [generateButton, setGenerateButton] = useState(false);
+
+  const handleGenerateButtonChange = () => {
+    setGenerateButton((prev) => !prev);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:4000/public/leagues/${leagueId}/table`, {
@@ -88,12 +102,31 @@ function LeagueDetailsSummary() {
       .then((response) => {
         if (response.ok) {
           alert("generowanie pomyślnie");
+          setGenerateButton(true);
         }
       })
       .catch((error) => {
         alert(error);
       });
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/public/leagues/${leagueId}/matches`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const mappeddata4: scheduleMatch[] = data.map((col: any) => ({
+          homeTeamId: col.homeTeamId,
+          awayTeamId: col.awayTeamId,
+          startDatetime: col.startDatetime,
+        }));
+        setScheduleMatch(mappeddata4);
+      });
+  }, [generateButton]);
 
   return (
     <>
@@ -129,7 +162,7 @@ function LeagueDetailsSummary() {
         <h1>Zespoły w lidze</h1>
       </div>
       {teams.map((teamOne) => (
-        <div className="col-md-11 position-relative d-flex shadow justify-content-between border border-3 align-items-center bg-light border-dark mt-5 mb-5 p-5 rounded-5 border-opacity-75 m-auto ">
+        <div className="col-md-11 position-relative d-flex shadow justify-content-between border border-3 align-items-center bg-light border-dark mt-3 mb-2 p-5 rounded-5 border-opacity-75 m-auto ">
           <h2>{teamOne.name}</h2>
           <img
             src={"http://localhost:4000" + teamOne.logoUrl}
@@ -138,9 +171,24 @@ function LeagueDetailsSummary() {
           />
         </div>
       ))}
-      <div>
-        <button onClick={generate}>awd awd</button>
+      <div className="text-white bg-dark p-3 d-flex justify-content-between mb-5 ">
+        <h1>Terminarz</h1>
+        <button onClick={generate} className="btn btn-primary">
+          Generuj Terminarz
+        </button>
       </div>
+      {generateButton && (
+        <div>
+          {scheduleMatch.map((match, index) => (
+            <TeamVsTeamCard
+              teams={teams}
+              homeTeamId={match.homeTeamId}
+              awayTeamId={match.awayTeamId}
+              startDatetime={match.startDatetime}
+            ></TeamVsTeamCard>
+          ))}
+        </div>
+      )}
     </>
   );
 }

@@ -69,7 +69,6 @@ function LeaguesDiplay(props: refreshAPIleagues) {
 
   return (
     <>
-      {" "}
       {leaguesNames.map((league) => (
         <LeaguesDisplayCard
           key={league.id}
