@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsCookie from "js-cookie";
 
@@ -94,7 +89,7 @@ export const AuthProvider = ({ children }: any) => {
     console.log("Usuwam token");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    jsCookie.remove('refreshToken');
+    jsCookie.remove("refreshToken");
     navigate("/"); // Przekierowanie do logowania
   };
 
