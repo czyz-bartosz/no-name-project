@@ -102,7 +102,7 @@ function LeagueDetailsSummary() {
       .then((response) => {
         if (response.ok) {
           alert("generowanie pomyślnie");
-          setGenerateButton(true);
+          handleGenerateButtonChange();
         }
       })
       .catch((error) => {
@@ -127,6 +127,24 @@ function LeagueDetailsSummary() {
         setScheduleMatch(mappeddata4);
       });
   }, [generateButton]);
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/public/leagues/${leagueId}/matches`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const mappeddata4: scheduleMatch[] = data.map((col: any) => ({
+          homeTeamId: col.homeTeamId,
+          awayTeamId: col.awayTeamId,
+          startDatetime: col.startDatetime,
+        }));
+        setScheduleMatch(mappeddata4);
+      });
+  }, []);
 
   return (
     <>
@@ -177,7 +195,7 @@ function LeagueDetailsSummary() {
           Generuj Terminarz
         </button>
       </div>
-      {generateButton && (
+      {
         <div>
           {scheduleMatch.map((match, index) => (
             <TeamVsTeamCard
@@ -188,7 +206,7 @@ function LeagueDetailsSummary() {
             ></TeamVsTeamCard>
           ))}
         </div>
-      )}
+      }
     </>
   );
 }

@@ -45,10 +45,13 @@ export const AuthProvider = ({ children }: any) => {
   // Funkcja odświeżająca token
   const refreshToken = async () => {
     try {
-      const response = await fetch("http://localhost:4000/refreshToken", {
-        method: "GET",
-        credentials: "include", // Umożliwia przesyłanie ciasteczek HttpOnly
-      });
+      const response = await fetch(
+        "http://localhost:4000/public/refreshToken",
+        {
+          method: "GET",
+          credentials: "include", // Umożliwia przesyłanie ciasteczek HttpOnly
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
