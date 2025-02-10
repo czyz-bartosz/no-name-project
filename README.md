@@ -1,4 +1,12 @@
-# No name project
+# Your football league
+
+A platform for organizing and managing football leagues.
+
+## Description
+Event Creator: Set up leagues and add teams.
+Team Manager: Create and manage teams.
+Referee: Oversee match protocols and assigned games.
+Guest: View leagues, live scores, and create an account for more access.
 
 ## How to run
 1. install nodejs
@@ -22,20 +30,3 @@
 ## Team:
 - Paweł Gałczyński
 - Bartosz Czyż
-
-## Description:
-Event Creator:
-- Create League: Initiates the formation of a new league.
-- Add Teams: Integrates teams into the league.
-  
-Team Manager:
-- Create Team: Responsible for forming and managing a team within the league.
-
-Referee:
-- Manage Match Protocols: Has the ability to add and edit match protocols to ensure fair play.
-- View Assigned Matches: Can see the matches they are scheduled to officiate.
-  
-Guest:
-- View Leagues: Has access to view the list of leagues.
-- View Live Scores: Can see live scores of ongoing matches.
-- Create Account: Has the option to create an account for enhanced access.
